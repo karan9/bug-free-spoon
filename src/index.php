@@ -26,6 +26,7 @@ $app->setBasePath('');
  */
 
 $app->map('GET|POST', '/', 'Index#init');
+$app->map('POST', '/users/[a:action]', 'Users#init_action');
 
 /**
  * @class: AltoRouter
@@ -39,9 +40,17 @@ if($match) {
     // divide on basis of our delimiter
     list($controller, $action) = explode(ACTION_DELIMITER, $match['target']);
     if(is_callable($controller, $action)) {
-        // require the needed controller
-        // and call it 
-        require_once(CONTROLLER_PATH . $controller . EXTN_PHP);
+        /**
+         * @var string => denotes path to require/import
+         */
+        $path = CONTROLLER_PATH . $controller . PATH_DELIMITER . $controller . EXTN_PHP;
+        // check and require the needed controller
+        // and call it
+        if (!file_exists($path)) {
+            $path = CONTROLLER_PATH . $controller . EXTN_PHP;
+        }
+
+        require_once($path);
         $obj = new $controller();
         call_user_func_array(array($obj, $action), $match['params']);
     } else {

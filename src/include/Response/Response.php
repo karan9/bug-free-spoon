@@ -133,7 +133,7 @@ class Response {
   public function set_response_data($data) {
     if (empty($data)) {
       $this->res_data = false;
-    } else {
+    } else { 
       $this->res_data = $data;
     }
   }

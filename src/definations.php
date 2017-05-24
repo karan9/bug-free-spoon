@@ -29,14 +29,14 @@ define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . PATH_DELIMITER);
  * @const: 'INCLUDE_PATH'
  * @description: 'path to includes our necessities'
  */
-define('INCLUDE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/include/');
+define('INCLUDE_PATH', SITE_ROOT . 'include/');
 
 
 /**
  * @const: 'CONTROLLER_PATH'
  * @description: 'path to include our controllers'
  */
-define('CONTROLLER_PATH', $_SERVER['DOCUMENT_ROOT'] . '/controllers/');
+define('CONTROLLER_PATH', SITE_ROOT . 'controllers/');
 
 
 /**

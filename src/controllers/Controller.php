@@ -56,6 +56,30 @@ abstract class Controller {
     }
   }
 
+  public function init_action($action) {
+    switch($_SERVER['REQUEST_METHOD']) {
+      case HTTP_GET:
+        $this->handle_get($action);
+        break;
+      case HTTP_POST:
+        $this->handle_post($action);
+        break;
+      default:
+        $this->handle_unhandled($action);
+    }
+  }
 
+  public function init_id($id) {
+    switch($_SERVER['REQUEST_METHOD']) {
+      case HTTP_GET:
+        $this->handle_get($id);
+        break;
+      case HTTP_POST:
+        $this->handle_post($id);
+        break;
+      default:
+        $this->handle_unhandled($id);
+    }
+  }
   
 }
