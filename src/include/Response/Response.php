@@ -1,5 +1,35 @@
 <?php
-
+/**
+ * @author: Karan Srivastava <karan.srivastava@protonmail.com>
+ * Response Class acts as main response wrapper
+ * to handle all output from our API
+ * this enables us to streamline how we send data
+ * 
+ * 
+ * @usage:
+ *  there are two ways one can use this Class
+ * 
+ * 1. Via Constructor:
+ *    - create construtor and pass
+ *    - all the specific params for it
+ *    - then call `send_response()`
+ * 
+ * 2. Via Factory Setup
+ *    - create a instance
+ *    - use exposed functions to set data 
+ *      accordingly
+ * 
+ *    @method: set_response_code => 
+ *              see it's defination to know more
+ * 
+ *    @method: set_response_data =>
+ *             see it's defination to know more
+ * 
+ *    @method: set_response_message =>
+ *            see it's defination to know more
+ * 
+ *   - after that call `send_response()`
+ */
 class Response {
 
   /**
@@ -46,6 +76,7 @@ class Response {
   /**
    * @method
    * @return : void
+   * @todo: Actually Implement it via a custom error handler
    */
   private function throw_error($message) {
     echo $message;
@@ -53,6 +84,10 @@ class Response {
 
   /**
    * @method constructor 
+   * @param @enforced: $code => response code
+   * @param: $data => any data to be sent in response
+   * @param: $message => any custom message to accompany 
+   * your response
    */
   public function __construct($code = false, $data = false, $message = false) {
     (empty($code)) ? false : $this->set_response_code($code);
@@ -60,6 +95,13 @@ class Response {
     (empty($message)) ? false : $this->set_response_message($message);
   }
 
+
+  /**
+   * @method: Exposes functionality to set
+   * http response code for the said response
+   * @return void
+   * @param: integer => must be a valid HTTP Response Code
+   */
   public function set_response_code($code) {
     if (empty($code)) {
       return;
@@ -82,6 +124,12 @@ class Response {
     }
   }
 
+  /**
+   * @method: Exposes functionality to set
+   * data for the said response
+   * @return void
+   * @param: array => must be a valid associative array
+   */
   public function set_response_data($data) {
     if (empty($data)) {
       $this->res_data = false;
@@ -90,6 +138,13 @@ class Response {
     }
   }
 
+
+  /**
+   * @method: Exposes functionality to set
+   * message for the said response
+   * @return void
+   * @param: String => must be a valid php string
+   */
   public function set_response_message($message) {
     if (empty($message)) {
       $this->res_message = false;
@@ -98,6 +153,10 @@ class Response {
     }
   }
 
+  /**
+   * @method: as name states SEND DEH RESPONSE!
+   * @return void
+   */
   public function send_response() {
     
     // setup reponse code
