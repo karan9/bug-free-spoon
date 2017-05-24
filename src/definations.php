@@ -37,3 +37,16 @@ define('INCLUDE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/include/');
  * @description: 'path to include our controllers'
  */
 define('CONTROLLER_PATH', $_SERVER['DOCUMENT_ROOT'] . '/controllers/');
+
+
+/**
+ * @const: 'HTTP_POST'
+ * @description: 'defines following request is POST'
+ */
+define('HTTP_POST', 'POST');
+
+/**
+ * @const: 'HTTP_GET'
+ * @description: 'defines following request is GET'
+ */
+define('HTTP_GET', 'GET');

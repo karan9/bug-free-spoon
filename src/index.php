@@ -25,7 +25,7 @@ $app->setBasePath('');
  * @params: [method, route, target];
  */
 
-$app->map('GET', '/', 'index#init');
+$app->map('GET|POST', '/', 'Index#init');
 
 /**
  * @class: AltoRouter

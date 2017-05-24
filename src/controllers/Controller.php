@@ -1,4 +1,6 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . "/definations.php";
+
 /**
  * @abstract: controller
  * @description: 
@@ -13,9 +15,47 @@
 abstract class Controller {
   
   /**
+   * @method: handle_post()
+   * @description: Hook for handling post requests in our
+   *               controller class
+   **/
+  abstract protected function handle_post();
+
+  /**
+   * @method: handle_post()
+   * @description: Hook for handling get requests in our
+   *               controller class
+   **/
+  abstract protected function handle_get();
+
+
+  /**
+   * @method: handle_post()
+   * @description: Hook for handling unhandled requests in our
+   *               controller class
+   **/
+  abstract protected function handle_unhandled();
+
+
+  /**
    * @method: init()
    * @description:  kickstart function for controllers
+   * this function checks and kickstarts things based on object
+   * of specified class
    **/
-  abstract public function init();
+  public function init() {
+    switch($_SERVER['REQUEST_METHOD']) {
+      case HTTP_GET:
+        $this->handle_get();
+        break;
+      case HTTP_POST:
+        $this->handle_post();
+        break;
+      default:
+        $this->handle_unhandled();
+    }
+  }
 
+
+  
 }
