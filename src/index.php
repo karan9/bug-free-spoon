@@ -20,7 +20,7 @@ $app = new AltoRouter();
 $app->setBasePath('');
 /**
  * @topic: route mapping
- * @class: AltoRouter @as $app
+ * @class: AltoRouter @obj $app
  * @method: map
  * @params: [method, route, target];
  */
