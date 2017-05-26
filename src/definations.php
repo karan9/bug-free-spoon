@@ -38,6 +38,11 @@ define('INCLUDE_PATH', SITE_ROOT . 'include/');
  */
 define('CONTROLLER_PATH', SITE_ROOT . 'controllers/');
 
+/**
+ * @const: 'LOG_PATH'
+ * @description: 'path to our logs'
+ */
+define('LOG_PATH', SITE_ROOT . 'logs/');
 
 /**
  * @const: 'HTTP_POST'
@@ -50,3 +55,21 @@ define('HTTP_POST', 'POST');
  * @description: 'defines following request is GET'
  */
 define('HTTP_GET', 'GET');
+
+/**
+ * @const: 'DB_HOST'
+ * @description: determines the name for database to be selected
+ */
+define('DB_HOST', 'localhost');
+
+/**
+ * @const: 'DB_USERNAME'
+ * @description: determines the name for database to be selected
+ */
+define('DB_USERNAME', 'root');
+
+/**
+ * @const: 'DB_PASSWORD'
+ * @description: determines the name for database to be selected
+ */
+define('DB_PASSWORD', 'docker');

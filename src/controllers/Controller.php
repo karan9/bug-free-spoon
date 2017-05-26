@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/definations.php";
 require_once INCLUDE_PATH . 'Response' . PATH_DELIMITER . 'Response' . EXTN_PHP;
+require_once INCLUDE_PATH . 'Error' . PATH_DELIMITER . 'ErrorFactory' . EXTN_PHP;
 
 /**
  * @abstract: controller
