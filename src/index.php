@@ -6,9 +6,7 @@
  **/
 require_once 'definations.php';
 require_once INCLUDE_PATH . 'AltoRouter.php';
-//@TODO: add response handler
-
-
+require_once INCLUDE_PATH . 'Response' . PATH_DELIMITER . 'Response' . EXTN_PHP;
 
 /**
  * @topic: init router
@@ -34,7 +32,9 @@ $app->map('POST', '/users/[a:action]', 'Users#init_action');
  */
 $match = $app->match();
 /**
- * @topic:
+ * @topic: handling matched routes
+ * checking their controllers
+ * and calling them on basis of their actions
  */
 if($match) {
     // divide on basis of our delimiter
@@ -57,6 +57,11 @@ if($match) {
         //@TODO: handle magic routes 
     }
 } else {
-    // @TODO: handle response routes
-    echo "Error: 404";
+    /**
+     * handling unavailable routes here
+     * aka: ERROR_404
+     **/
+    $response = new Response();
+    $response->set_response_code(Response::RES_NOT_FOUND);
+    $response->send_response();
 }

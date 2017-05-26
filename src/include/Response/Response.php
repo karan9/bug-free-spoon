@@ -48,6 +48,21 @@ class Response {
   const RES_SERVER_ERROR = 500;
 
   /**
+   * @var constant: RES_OK_MSG
+   **/
+  const RES_OK_MSG = "Response Successfully Sent";
+
+  /**
+   * @var constant: RES_NOT_FOUND_MSG
+   **/
+  const RES_NOT_FOUND_MSG = "Request Not Found";
+
+  /** 
+   * @var constant:  RES_SERVER_ERROR_MSG
+   */
+  const RES_SERVER_ERROR_MSG = "Internal Server Error";
+
+  /**
    * @var response: Response Code
    */
   private $res_code = NULL;
@@ -178,10 +193,34 @@ class Response {
     ?  $__response["message"] = false
     :  $__response["message"] = $this->res_message;
 
+    if (empty($this->res_message)) {
+      switch ($this->res_code) {
+        case self::RES_OK:
+          $__response["message"] = self::RES_OK_MSG;
+          break;
+        case self::RES_NOT_FOUND:
+          $__response["message"] = self::RES_NOT_FOUND_MSG;
+          break;
+        case self::RES_SERVER_ERROR:
+          $__response["message"] = self::RES_SERVER_ERROR_MSG;
+          break;
+        default:
+          $__response["message"] = false;
+      }
+    } else {
+      $__response["message"] = $this->res_message;
+    }
+
     // setup data;
     (empty($this->res_data)) 
     ?  $__response["data"] = false
     :  $__response["data"] = $this->res_data;
+
+
+    /** 
+     * @header: send in json 
+     */
+    header('Content-Type: application/json');
 
     // send the response
     echo json_encode($__response);
