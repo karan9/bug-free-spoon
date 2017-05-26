@@ -18,11 +18,9 @@ class ErrorFactory {
    * @param: $str: contains our log message
    */
   public static function log($method, $str) {
-    // add a newline in logs
-    $str += "\n";
     // error_counter
     $error_count += 1;
     // actually post log
-    error_log("$error_count: $method => $str", 3, LOG_PATH . PATH_DELIMITER . ERROR_FILE);
+    error_log("$error_count: $method => $str");
   }
 }

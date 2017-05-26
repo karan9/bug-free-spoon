@@ -61,7 +61,5 @@ if($match) {
      * handling unavailable routes here
      * aka: ERROR_404
      **/
-    $response = new Response();
-    $response->set_response_code(Response::RES_NOT_FOUND);
-    $response->send_response();
+    Response::send_response_not_found();
 }

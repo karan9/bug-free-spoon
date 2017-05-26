@@ -26,7 +26,9 @@ class Users extends Controller {
             $this->signup();
             break;
           default:
-            // TODO: throw Unsupported ACTION ERROR
+            ErrorFactory::log(__METHOD__, "testing the logs");
+            Response::send_response_not_found();
+            break;
         }
     }
 

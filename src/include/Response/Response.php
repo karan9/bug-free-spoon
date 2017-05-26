@@ -1,4 +1,5 @@
 <?php
+require_once INCLUDE_PATH . 'Error' . PATH_DELIMITER . 'ErrorFactory' . EXTN_PHP;
 /**
  * @author: Karan Srivastava <karan.srivastava@protonmail.com>
  * Response Class acts as main response wrapper
@@ -87,16 +88,6 @@ class Response {
    */
   private $__response = array();
 
-
-  /**
-   * @method
-   * @return : void
-   * @todo: Actually Implement it via a custom error handler
-   */
-  private function throw_error($message) {
-    echo $message;
-  }
-
   /**
    * @method constructor 
    * @param @enforced: $code => response code
@@ -156,7 +147,7 @@ class Response {
 
   /**
    * @method: Exposes functionality to set
-   * message for the said response
+   *          message for the said response
    * @return void
    * @param: String => must be a valid php string
    */
@@ -176,7 +167,7 @@ class Response {
     
     // setup reponse code
     if (empty($this->res_code)) {
-      $this->throw_error("Response code not found");
+      ErrorFactory::log(__METHOD__, "Unable to fetch response code");
       return;
     } else {
       http_response_code($this->res_code);
@@ -185,7 +176,7 @@ class Response {
     
     // setup error
     (empty($this->is_res_error)) 
-    ?  $__response["error"] = false 
+    ?  $__response["error"] = false
     :  $__response["error"] = true;
 
     // setup message
@@ -225,4 +216,28 @@ class Response {
     // send the response
     echo json_encode($__response);
   }
+
+  /**
+   * @glorified hack
+   * to find better way to handle it
+   **/
+   private static function get_instance() {
+     return new Response();
+   }
+
+  /**
+   * @static
+   * @method
+   **/
+   public static function send_response_not_found() {
+      $res = static::get_instance();
+      $res->set_response_code(self::RES_NOT_FOUND);
+      $res->send_response();
+   }
+
+   public static function send_response_server_error() {
+      $res = static::get_instance();
+      $res->set_response_code(self::RES_SERVER_ERROR);
+      $res->send_response();
+   }
 }
